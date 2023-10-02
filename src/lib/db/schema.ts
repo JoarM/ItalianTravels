@@ -1,12 +1,36 @@
-import { relations } from "drizzle-orm";
-import { mysqlTable, bigint, varchar, serial, int } from "drizzle-orm/mysql-core";
+import { mysqlTable, bigint, varchar } from "drizzle-orm/mysql-core";
+import { createInsertSchema } from "drizzle-zod";
+import { z } from "zod";
 
 export const user = mysqlTable("auth_user", {
 	id: varchar("id", {
 		length: 256
-	}).primaryKey()
-
+	}).primaryKey(),
+	email: varchar("email", { length: 128 }),
+	firstname: varchar("firstname", {
+		length: 256
+	}),
+	lastname: varchar("lastname", {
+		length: 256,
+	}),
 });
+
+export const insertUserSchema = z.object({
+	email: z.string()
+	.email({ message: "Please enter a valid email" }),
+	firstname: z.string()
+	.min(1, { message: "You need to enter a name" })
+	.max(256, { message: "Firstname can't be more than 256 characters" }),
+	lastname: z.string()
+	.min(1, { message: "You need to enter a last name" })
+	.max(256, { message: "Lastname can't be more than 256 characters" }),
+	password: z.string()
+	.min(6, "Password needs to be atleast 6 characthers")
+	.max(64, "Password cant be more than 64 characthers")
+	.regex(/[A-Z]/, { message: "Password must include uppercase letter" })
+	.regex(/[a-z]/, { message: "Password must include lowercase letter" })
+	.regex(/[0-9]/, { message: "Password must include nummber" }),
+})
 
 export const key = mysqlTable("user_key", {
 	id: varchar("id", {
@@ -44,7 +68,18 @@ export const airports = mysqlTable("airports", {
     city: varchar("city", { length: 64 }),
 });
 
+export const arrivals = mysqlTable("arrivals", {
+	airport_code: varchar("airport_code", { length: 3 }).references(() => airports.code),
+	flight_id: bigint("flight_id", { mode: "number" }).references(() => flights.id),
+});
+
+export const departures = mysqlTable("departures", {
+	airport_code: varchar("airport_code", { length: 3 }).references(() => airports.code),
+	flight_id: bigint("flight_id", { mode: "number" }).references(() => flights.id),
+});
+
 export const flights = mysqlTable("flights", {
+	id: bigint("id", { mode: "number" }).unique().autoincrement().unique().primaryKey(),
     origin: varchar("origin", { length: 3 }).references(() => airports.code, {
 		onDelete: "cascade"
 	}),
@@ -54,16 +89,8 @@ export const flights = mysqlTable("flights", {
     duration: bigint("duration", { mode: "number" }), //Flight duration in minutes
 });
 
-export const airportsRelations = relations(airports, ({ many }) => ({
-	departures: many(flights),
-}));
-
-export const flightsRelations = relations(flights, ({ one }) => ({
-	origin: one(airports, {
-		references: [airports.code],
-		fields: [flights.origin],
-		relationName: "departures"
-	})
-}));
-  
+export const passengers = mysqlTable("passengers", {
+	user_id: varchar("user_id", { length: 256 }).references(() => user.id),
+	flight_id: bigint("flight_id", { mode: "number" }).references(() => flights.id),
+});
 

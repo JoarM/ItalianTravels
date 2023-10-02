@@ -1,8 +1,8 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "5d6efe0f-491b-4f60-9d40-d94a0ee16880",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "86e56c93-0dda-41b6-9ea4-7f378436a310",
+  "prevId": "5d6efe0f-491b-4f60-9d40-d94a0ee16880",
   "tables": {
     "airports": {
       "name": "airports",
@@ -379,6 +379,13 @@
           "type": "varchar(256)",
           "primaryKey": false,
           "notNull": true,
+          "autoincrement": false
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar(128)",
+          "primaryKey": false,
+          "notNull": false,
           "autoincrement": false
         },
         "firstname": {
