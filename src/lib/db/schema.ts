@@ -6,7 +6,7 @@ export const user = mysqlTable("auth_user", {
 	id: varchar("id", {
 		length: 256
 	}).primaryKey(),
-	email: varchar("email", { length: 128 }),
+	email: varchar("email", { length: 128 }).unique(),
 	firstname: varchar("firstname", {
 		length: 256
 	}),
@@ -19,18 +19,25 @@ export const insertUserSchema = z.object({
 	email: z.string()
 	.email({ message: "Please enter a valid email" }),
 	firstname: z.string()
-	.min(1, { message: "You need to enter a name" })
+	.min(1, { message: "You need to enter a firstname" })
 	.max(256, { message: "Firstname can't be more than 256 characters" }),
 	lastname: z.string()
-	.min(1, { message: "You need to enter a last name" })
+	.min(1, { message: "You need to enter a lastname" })
 	.max(256, { message: "Lastname can't be more than 256 characters" }),
 	password: z.string()
 	.min(6, "Password needs to be atleast 6 characthers")
 	.max(64, "Password cant be more than 64 characthers")
 	.regex(/[A-Z]/, { message: "Password must include uppercase letter" })
 	.regex(/[a-z]/, { message: "Password must include lowercase letter" })
-	.regex(/[0-9]/, { message: "Password must include nummber" }),
-})
+	.regex(/[0-9]/, { message: "Password must include number" }),
+});
+
+export const signinSchema = z.object({
+	email: z.string()
+	.min(1),
+	password: z.string()
+	.min(1)
+});
 
 export const key = mysqlTable("user_key", {
 	id: varchar("id", {

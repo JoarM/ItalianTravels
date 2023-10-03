@@ -15,6 +15,13 @@
       "when": 1696240014527,
       "tag": "0001_brainy_pyro",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1696258495286,
+      "tag": "0002_careless_garia",
+      "breakpoints": true
     }
   ]
 }
