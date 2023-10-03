@@ -15,7 +15,7 @@ import type { PageData } from "./$types";
             <ul class="mt-2">
                 {#each data.flights as flight}
                     <li>
-                        <a href="/" class={buttonVariants({ variant: "link" })}>From { flight.origin } to { flight.destination }</a>
+                        <a href="/flights/{flight.id}" class={buttonVariants({ variant: "link" })}>From { flight.origin } to { flight.destination }</a>
                     </li>
                 {/each}
             </ul>
@@ -27,7 +27,7 @@ import type { PageData } from "./$types";
             <ul class="mt-2">
                 {#each data.airports as airport}
                     <li>
-                        <a href="/" class={buttonVariants({ variant: "link" })}>{ airport.city } ({ airport.code })</a>
+                        <a href="/airports/{airport.code}" class={buttonVariants({ variant: "link" })}>{ airport.city } ({ airport.code })</a>
                     </li>
                 {/each}
             </ul>
