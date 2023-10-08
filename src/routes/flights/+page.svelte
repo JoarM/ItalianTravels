@@ -24,10 +24,12 @@
     }
 </script>
 
-<main class="mx-auto w-full max-w-6xl py-12">
+<main class="mx-auto w-full max-w-6xl py-12 px-6">
     <h1 class="text-4xl font-bold tracking-tight lg:text-5xl">Fligths</h1>
 
-    <Table.Root class="mt-8 p-4">
+    <a href="/flights/create" class={cn(buttonVariants({ variant: "outline" }), "mt-3")}>Add flight</a>
+
+    <Table.Root class="mt-4 p-4">
         <Table.Header>
             <Table.Row>
                 <Table.Head class="w-28">Id</Table.Head>
@@ -38,10 +40,12 @@
         </Table.Header>
         <Table.Body>
             {#each data.flights as flight}
-                <Table.Cell>{ flight.id }</Table.Cell>
-                <Table.Cell>{ flight.origin }</Table.Cell>
-                <Table.Cell>{ flight.destination }</Table.Cell>
-                <Table.Cell class="text-right">{ formatTime(flight.duration) }</Table.Cell>
+                <Table.Row>
+                    <Table.Cell>{ flight.id }</Table.Cell>
+                    <Table.Cell>{ flight.origin }</Table.Cell>
+                    <Table.Cell>{ flight.destination }</Table.Cell>
+                    <Table.Cell class="text-right">{ formatTime(flight.duration) }</Table.Cell>
+                </Table.Row>
             {/each}
         </Table.Body>
     </Table.Root>
@@ -76,5 +80,4 @@
             >
         </div>
     </nav>
-
 </main>

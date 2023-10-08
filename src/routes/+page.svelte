@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { buttonVariants } from "$lib/components/ui/button";
 	import { cn } from "$lib/utils";
-    import type { PageData } from "./$types";
+    import type { LayoutData, PageData } from "./$types";
 
     export let data: PageData;
 </script>
 
-<main class="mx-auto w-full max-w-6xl grid place-items-center py-12">
+<main class="mx-auto w-full max-w-6xl grid place-items-center py-12 px-6">
     <h1 class="text-4xl font-bold tracking-tight lg:text-5xl">Italian Flights</h1>
     <div class="grid md:grid-cols-2 gap-8 w-full mt-4">
         <article class="p-3 rounded-md border">

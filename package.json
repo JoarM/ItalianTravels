@@ -44,12 +44,14 @@
 		"clsx": "^2.0.0",
 		"drizzle-orm": "^0.28.6",
 		"drizzle-zod": "^0.5.1",
+		"formsnap": "^0.1.4",
 		"lucia": "^2.7.0",
 		"lucide-svelte": "^0.279.0",
 		"mysql2": "^3.6.1",
 		"pg": "^8.11.3",
+		"sveltekit-superforms": "^1.8.0",
 		"tailwind-merge": "^1.14.0",
 		"tailwind-variants": "^0.1.14",
-		"zod": "^3.22.2"
+		"zod": "^3.22.4"
 	}
 }

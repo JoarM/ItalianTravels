@@ -8,8 +8,8 @@
 	export let data: PageData;
 </script>
 
-<header class="sticky top-0 border-b backdrop-blur-sm h-16 flex items-center justify-center px-6">
-	<div class="w-full max-w-6xl flex items-center justify-between">
+<header class="sticky top-0 border-b backdrop-blur-sm h-16 flex items-center justify-center">
+	<div class="w-full max-w-6xl px-6 flex items-center justify-between">
 		<div>
 			<a href="/" class="font-bold text-2xl">Italian Flights</a>
 			<nav>

@@ -96,6 +96,12 @@ export const flights = mysqlTable("flights", {
     duration: bigint("duration", { mode: "number" }), //Flight duration in minutes
 });
 
+export const insertFlightSchema = z.object({
+	origin: z.string().length(3, { message: "Incorrect origin code format" }),
+	destination: z.string().length(3, { message: "Incorrect destination code format" }),
+	duration: z.number().min(10, { message: "Fligths cant be shorter than 10 minutes" }),
+});
+
 export const passengers = mysqlTable("passengers", {
 	user_id: varchar("user_id", { length: 256 }).references(() => user.id),
 	flight_id: bigint("flight_id", { mode: "number" }).references(() => flights.id),

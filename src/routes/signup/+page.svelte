@@ -13,7 +13,7 @@
     export let form: ActionData;
 </script>
 
-<main class="w-full max-w-lg mx-auto py-12">
+<main class="w-full max-w-lg mx-auto py-12 px-6">
     <h1 class="scroll-m-20 text-2xl font-bold tracking-tight lg:text-3xl">Sign up</h1>
     <form method="post" class="mt-6 grid gap-4" 
     use:enhance={() => {
