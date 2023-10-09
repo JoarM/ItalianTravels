@@ -40,7 +40,7 @@
                     <Table.Cell>{ flight.origin }</Table.Cell>
                     <Table.Cell>{ flight.destination }</Table.Cell>
                     <Table.Cell class="text-right">{ formatTime(flight.duration) }</Table.Cell>
-                    <Table.Cell class="w-24"><a href="/fligts/{flight.id}" class={cn(buttonVariants({ variant: "link" }), "mx-auto") }>Go to fligth</a></Table.Cell>
+                    <Table.Cell class="w-24"><a href="/flights/{flight.id}" class={cn(buttonVariants({ variant: "link" }), "mx-auto") }>Go to fligth</a></Table.Cell>
                 </Table.Row>
             {/each}
         </Table.Body>
@@ -59,14 +59,15 @@
         <div class="flex items-center gap-2">
             <button
             class={cn(buttonVariants({ variant: "outline" }))}
-            use:melt={$prevButton}><ChevronLeft class="square-4" /></button>
+            use:melt={$prevButton}><ChevronLeft class="square-4" />
+            </button>
             {#each $pages as page (page.key)}
             {#if page.type === 'ellipsis'}
                 <span>...</span>
             {:else}
-                <button
+                <a href="/flights?start={page.value}"
                 class={cn(buttonVariants({ variant: "outline" }))}
-                use:melt={$pageTrigger(page)}>{page.value}</button
+                use:melt={$pageTrigger(page)}>{page.value}</a
                 >
             {/if}
             {/each}

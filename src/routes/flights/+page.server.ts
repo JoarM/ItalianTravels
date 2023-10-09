@@ -5,7 +5,7 @@ import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async (request) => {
     let start = request.url.searchParams.get("start") ? Number(request.url.searchParams.get("start")) : 0;
-    let limit = request.url.searchParams.get("start") ? Number(request.url.searchParams.get("limit")) : 10;
+    let limit = request.url.searchParams.get("limit") ? Number(request.url.searchParams.get("limit")) : 10;
     const count = await db.select({ count: sql`COUNT(*)` }).from(flights);
     if (Number.isNaN(start)) {
         start = 0;
@@ -18,7 +18,7 @@ export const load: PageServerLoad = async (request) => {
     }
 
 	return {
-		flights: await db.select().from(flights).offset(start).limit(limit),
+		flights: await db.select().from(flights).offset((start - 1) * limit).limit(limit),
         flightCount: count[0].count as number,
         limit: limit,
 	};
