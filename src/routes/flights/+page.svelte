@@ -57,23 +57,24 @@
     use:melt={$root}
     >
         <div class="flex items-center gap-2">
-            <button
-            class={cn(buttonVariants({ variant: "outline" }))}
-            use:melt={$prevButton}><ChevronLeft class="square-4" />
-            </button>
+            <a href="/flights?start={data.start - 1}&limit={data.limit}"
+            class={cn(buttonVariants({ variant: "outline" }), `${data.start <= 1 && "opacity-50 pointer-events-none"}`)}
+            use:melt={$prevButton}
+            ><ChevronLeft class="square-4" />
+            </a>
             {#each $pages as page (page.key)}
             {#if page.type === 'ellipsis'}
                 <span>...</span>
             {:else}
-                <a href="/flights?start={page.value}"
+                <a href="/flights?start={page.value}&limit={data.limit}"
                 class={cn(buttonVariants({ variant: "outline" }))}
                 use:melt={$pageTrigger(page)}>{page.value}</a
                 >
             {/if}
             {/each}
-            <button
-            class={cn(buttonVariants({ variant: "outline" }))}
-            use:melt={$nextButton}><ChevronRight class="square-4" /></button
+            <a href="/flights?start={data.start + 1}&limit={data.limit}"
+            class={cn(buttonVariants({ variant: "outline" }), `${data.start * data.limit >= data.flightCount && "opacity-50 pointer-events-none"}`)}
+            use:melt={$nextButton}><ChevronRight class="square-4" /></a
             >
         </div>
     </nav>
