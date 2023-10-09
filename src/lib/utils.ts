@@ -60,3 +60,8 @@ export const flyAndScale = (
         easing: cubicOut
     };
 };
+
+export function formatTime(minutes: number | null): string {
+    if (!minutes) return "";
+    return `${Math.floor(minutes / 60)} hours ${minutes % 60} minutes`
+}

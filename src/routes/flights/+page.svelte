@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { buttonVariants } from "$lib/components/ui/button";
 	import * as Table from "$lib/components/ui/table";
-	import { cn } from "$lib/utils";
+	import { cn, formatTime } from "$lib/utils";
 	import type { PageData } from "./$types";
     import { createPagination, melt } from '@melt-ui/svelte';
     import { ChevronLeft, ChevronRight } from 'lucide-svelte';
@@ -17,11 +17,6 @@
         defaultPage: 1,
         siblingCount: 1,
     });
-
-    function formatTime(minutes: number | null): string {
-        if (!minutes) return "";
-        return `${Math.floor(minutes / 60)} hours ${minutes % 60} minutes`
-    }
 </script>
 
 <main class="mx-auto w-full max-w-6xl py-12 px-6">
@@ -45,6 +40,7 @@
                     <Table.Cell>{ flight.origin }</Table.Cell>
                     <Table.Cell>{ flight.destination }</Table.Cell>
                     <Table.Cell class="text-right">{ formatTime(flight.duration) }</Table.Cell>
+                    <Table.Cell class="w-24"><a href="/fligts/{flight.id}" class={cn(buttonVariants({ variant: "link" }), "mx-auto") }>Go to fligth</a></Table.Cell>
                 </Table.Row>
             {/each}
         </Table.Body>

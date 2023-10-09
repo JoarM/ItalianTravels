@@ -10,10 +10,14 @@
 
 <header class="sticky top-0 border-b backdrop-blur-sm h-16 flex items-center justify-center">
 	<div class="w-full max-w-6xl px-6 flex items-center justify-between">
-		<div>
+		<div class="flex gap-4 items-center justify-center">
 			<a href="/" class="font-bold text-2xl">Italian Flights</a>
 			<nav>
-
+				<ul class="flex items-center justify-center gap-2">
+					<li>
+						<a href="/flights" class={cn(buttonVariants({ variant: "outline" }))}>Flights</a>
+					</li>
+				</ul>
 			</nav>
 		</div>
 		
