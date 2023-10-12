@@ -1,13 +1,11 @@
-import { signinSchema, user } from "$lib/db/schema";
+import { signinSchema } from "$lib/db/schema";
 import { fail, redirect } from "@sveltejs/kit";
 import type { Actions } from "./$types";
 import { auth } from "$lib/server/lucia";
 import { LuciaError } from "lucia";
-import { db } from "$lib/db";
-import { eq } from "drizzle-orm";
 
 export const actions = {
-    default: async ({ request, locals }) => {
+    default: async ({ request, locals, url }) => {
         const formData = await request.formData();
         const email = formData.get("email")?.valueOf();
         const password = formData.get("password")?.valueOf();
@@ -53,6 +51,9 @@ export const actions = {
 			});
         }
 
-        throw redirect(302, "/");
+        let previous = url.searchParams.get("previous");
+        previous = previous ? previous.slice(1) : "";
+
+        throw redirect(302, "/" + previous);
     }
 } satisfies Actions

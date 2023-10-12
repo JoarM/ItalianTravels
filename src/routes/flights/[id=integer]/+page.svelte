@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { enhance } from "$app/forms";
 	import Button from "$lib/components/ui/button/button.svelte";
+    import * as AlertDialog from "$lib/components/ui/alert-dialog";
     import { formatTime } from "$lib/utils";
 	import type { ActionData, PageData } from "./$types";
 
@@ -14,13 +15,34 @@
 
     <h2 class="border-b pb-2 text-3xl font-semibold tracking-tight transition-colors mt-4 first:mt-0">Passengers</h2>
     
-    <form method="post" class="mt-4" use:enhance>
-        <Button>Book flight</Button>
+    <form method="post" class="mt-4" id="book" action="?/book" use:enhance>
+        {#if !data.userOnFlight}
+            <Button>Book flight</Button>
+        {:else}
+            <AlertDialog.Root>
+                <AlertDialog.Trigger>
+                    <Button variant="destructive" type="button">Unbook flight</Button>
+                </AlertDialog.Trigger>
+                <AlertDialog.Content>
+                    <AlertDialog.Header>
+                        <AlertDialog.Title>Confirm unbooking of flight { data.flight.id }</AlertDialog.Title>
+                        <AlertDialog.Description>
+                        Unbook your flight from { data.flight.origin?.city } to { data.flight.destination?.city } you can rebook your flight later if seats are still avilable.
+                        </AlertDialog.Description>
+                    </AlertDialog.Header>
+                    <AlertDialog.Footer>
+                        <AlertDialog.Cancel>Cancel</AlertDialog.Cancel>
+                        <AlertDialog.Action formaction="?/unbook" type="submit" form="book">Unbook flight</AlertDialog.Action>
+                    </AlertDialog.Footer>
+                </AlertDialog.Content>
+            </AlertDialog.Root>
+        {/if}
+        
         {#if form?.message}
             <p class="text-sm mt-2 font-medium text-destructive">{ form.message }</p>
         {/if}
         {#if form?.success}
-            <p class="mt-2 text-sm font-medium">U are now book for this flight</p>
+            <p class="mt-2 text-sm font-medium">{ form.success }</p>
         {/if}
     </form>
 

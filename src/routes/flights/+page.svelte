@@ -53,24 +53,27 @@
         <p class="text-sm font-normal mt-4">No content for this selection.</p>
     {/if}
 
-    <div>
-        <Label>Items on this page</Label>
-        <Select.Root>
-            <Select.Trigger>
-                <Select.Value placeholder={data.limit.toString()}/>
-            </Select.Trigger>
-            <Select.Content>
-                <Select.Item value="10">
-                    <a href="/flights?start={data.start}&limit=10">10</a>
-                </Select.Item>
-                <Select.Item value="25">
-                    <a href="/flights?start={data.start}&limit=10">25</a>
-                </Select.Item>
-                <Select.Item value="50">
-                    <a href="/flights?start={data.start}&limit=10">50</a>
-                </Select.Item>
-            </Select.Content>
-        </Select.Root>
+    <div class="grid grid-cols-3 gap-4 place-items-center mt-2">
+        <div class="flex items-center justify-center justify-self-start gap-2">
+            <Label for="limit">Items on this page</Label>
+            <Select.Root>
+                <Select.Trigger class="w-20" id="limit">
+                    <Select.Value placeholder={data.limit.toString()}/>
+                </Select.Trigger>
+                <Select.Content>
+                    <Select.Item value="10">
+                        <a href="/flights?start={data.start}&limit=10" class="w-full">10</a>
+                    </Select.Item>
+                    <Select.Item value="25">
+                        <a href="/flights?start={data.start}&limit=25" class="w-full">25</a>
+                    </Select.Item>
+                    <Select.Item value="50">
+                        <a href="/flights?start={data.start}&limit=50" class="w-full">50</a>
+                    </Select.Item>
+                </Select.Content>
+            </Select.Root>
+        </div>
+        
         
         <nav
         class="flex flex-col items-center gap-4"

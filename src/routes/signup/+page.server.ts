@@ -4,7 +4,7 @@ import type { Actions } from "./$types";
 import { auth } from "$lib/server/lucia";
 
 export const actions = {
-    default: async ({ request, locals }) => {
+    default: async ({ request, locals, url }) => {
         const formdata = await request.formData();
         const firstname = formdata.get("firstname")?.valueOf();
         const lastname = formdata.get("lastname")?.valueOf();
@@ -69,6 +69,9 @@ export const actions = {
 			});
         }
 
-        throw redirect(302, "/");
+        let previous = url.searchParams.get("previous");
+        previous = previous ? previous.slice(1) : "";
+
+        throw redirect(302, "/" + previous);
     }
 } satisfies Actions;

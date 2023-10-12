@@ -4,6 +4,7 @@
 	import '../app.postcss';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import { cn } from '$lib/utils';
+	import { page } from '$app/stores';
 
 	export let data: PageData;
 </script>
@@ -24,16 +25,16 @@
 		<form method="post">
 			{#if data.user}
 				<span class="mr-3 text-lg font-semibold">{ data.user.firstname }</span>
-				<Button variant="secondary" formaction="/signout" type="submit" role="button">Signout</Button>
+				<Button variant="secondary" formaction="/signout?previous={$page.url.pathname}" type="submit" role="button">Signout</Button>
 			{:else}
-				<a href="/signin" class={cn(buttonVariants({ variant: "outline" }), "mr-2")}>
+				<a href="/signin?previous={$page.url.pathname}" class={cn(buttonVariants({ variant: "outline" }), "mr-2")}>
 					Sign in
 				</a>
-				<a href="/signup" class={buttonVariants({ variant: "default" })}>
+				<a href="/signup?previous={$page.url.pathname}" class={buttonVariants({ variant: "default" })}>
 					Sign up
 				</a>
 			{/if}
-			</form>
+		</form>
 	</div>
 </header>
 
