@@ -1,4 +1,4 @@
-import { mysqlTable, bigint, varchar } from "drizzle-orm/mysql-core";
+import { mysqlTable, bigint, varchar, unique } from "drizzle-orm/mysql-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -105,5 +105,7 @@ export const insertFlightSchema = z.object({
 export const passengers = mysqlTable("passengers", {
 	user_id: varchar("user_id", { length: 256 }).references(() => user.id),
 	flight_id: bigint("flight_id", { mode: "number" }).references(() => flights.id),
-});
+}, (t) => ({
+	unq: unique().on(t.user_id, t.flight_id),
+}));
 

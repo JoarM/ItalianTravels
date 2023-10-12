@@ -1,0 +1,1 @@
+ALTER TABLE `passengers` ADD CONSTRAINT `passengers_user_id_flight_id_unique` UNIQUE(`user_id`,`flight_id`);

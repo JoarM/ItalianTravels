@@ -1,9 +1,11 @@
 <script lang="ts">
+	import { enhance } from "$app/forms";
 	import Button from "$lib/components/ui/button/button.svelte";
     import { formatTime } from "$lib/utils";
-	import type { PageData } from "./$types";
+	import type { ActionData, PageData } from "./$types";
 
     export let data: PageData;
+    export let form: ActionData;
 </script>
 
 <main class="mx-auto w-full max-w-6xl py-12 px-6">
@@ -12,11 +14,17 @@
 
     <h2 class="border-b pb-2 text-3xl font-semibold tracking-tight transition-colors mt-4 first:mt-0">Passengers</h2>
     
-    <form method="post" class="mt-4">
+    <form method="post" class="mt-4" use:enhance>
         <Button>Book flight</Button>
+        {#if form?.message}
+            <p class="text-sm mt-2 font-medium text-destructive">{ form.message }</p>
+        {/if}
+        {#if form?.success}
+            <p class="mt-2 text-sm font-medium">U are now book for this flight</p>
+        {/if}
     </form>
 
-    <ul class="mt-4 space-y-2 list-disc">
+    <ul class="mt-4 space-y-2 list-disc px-3">
         {#each data.passengers as passenger}
             <li class="text-sm">{ passenger.firstname } { passenger.lastname } ({ passenger.email })</li>
         {/each}

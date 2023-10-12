@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { buttonVariants } from "$lib/components/ui/button";
+	import Label from "$lib/components/ui/label/label.svelte";
+	import * as Select from "$lib/components/ui/select";
 	import * as Table from "$lib/components/ui/table";
 	import { cn, formatTime } from "$lib/utils";
 	import type { PageData } from "./$types";
@@ -51,31 +53,53 @@
         <p class="text-sm font-normal mt-4">No content for this selection.</p>
     {/if}
 
-    <nav
-    class="flex flex-col items-center gap-4"
-    aria-label="pagination"
-    use:melt={$root}
-    >
-        <div class="flex items-center gap-2">
-            <a href="/flights?start={data.start - 1}&limit={data.limit}"
-            class={cn(buttonVariants({ variant: "outline" }), `${data.start <= 1 && "opacity-50 pointer-events-none"}`)}
-            use:melt={$prevButton}
-            ><ChevronLeft class="square-4" />
-            </a>
-            {#each $pages as page (page.key)}
-            {#if page.type === 'ellipsis'}
-                <span>...</span>
-            {:else}
-                <a href="/flights?start={page.value}&limit={data.limit}"
-                class={cn(buttonVariants({ variant: "outline" }))}
-                use:melt={$pageTrigger(page)}>{page.value}</a
+    <div>
+        <Label>Items on this page</Label>
+        <Select.Root>
+            <Select.Trigger>
+                <Select.Value placeholder={data.limit.toString()}/>
+            </Select.Trigger>
+            <Select.Content>
+                <Select.Item value="10">
+                    <a href="/flights?start={data.start}&limit=10">10</a>
+                </Select.Item>
+                <Select.Item value="25">
+                    <a href="/flights?start={data.start}&limit=10">25</a>
+                </Select.Item>
+                <Select.Item value="50">
+                    <a href="/flights?start={data.start}&limit=10">50</a>
+                </Select.Item>
+            </Select.Content>
+        </Select.Root>
+        
+        <nav
+        class="flex flex-col items-center gap-4"
+        aria-label="pagination"
+        use:melt={$root}
+        >
+            <div class="flex items-center gap-2">
+                <a href="/flights?start={data.start - 1}&limit={data.limit}"
+                class={cn(buttonVariants({ variant: "outline" }), `${data.start <= 1 && "opacity-50 pointer-events-none"}`)}
+                use:melt={$prevButton}
+                ><ChevronLeft class="square-4" />
+                </a>
+                {#each $pages as page (page.key)}
+                {#if page.type === 'ellipsis'}
+                    <span>...</span>
+                {:else}
+                    <a href="/flights?start={page.value}&limit={data.limit}"
+                    class={cn(buttonVariants({ variant: "outline" }))}
+                    use:melt={$pageTrigger(page)}>{page.value}</a
+                    >
+                {/if}
+                {/each}
+                <a href="/flights?start={data.start + 1}&limit={data.limit}"
+                class={cn(buttonVariants({ variant: "outline" }), `${data.start * data.limit >= data.flightCount && "opacity-50 pointer-events-none"}`)}
+                use:melt={$nextButton}><ChevronRight class="square-4" /></a
                 >
-            {/if}
-            {/each}
-            <a href="/flights?start={data.start + 1}&limit={data.limit}"
-            class={cn(buttonVariants({ variant: "outline" }), `${data.start * data.limit >= data.flightCount && "opacity-50 pointer-events-none"}`)}
-            use:melt={$nextButton}><ChevronRight class="square-4" /></a
-            >
-        </div>
-    </nav>
+            </div>
+        </nav>
+    </div>
+
+    
 </main>

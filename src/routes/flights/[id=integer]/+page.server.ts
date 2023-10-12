@@ -2,6 +2,7 @@ import { db } from "$lib/db";
 import { airports, flights, passengers, user } from "$lib/db/schema";
 import { eq, or } from "drizzle-orm";
 import type { Actions, PageServerLoad } from "./$types";
+import { fail } from "@sveltejs/kit";
 
 export const load: PageServerLoad = async ({ params }) => {
     const id = Number(params.id);
@@ -43,10 +44,22 @@ export const actions = {
             return;
         }
 
-        await db.insert(passengers).values({
-            flight_id: id,
-            user_id: user.user.userId
-        });
+        try {
+            await db.insert(passengers).values({
+                flight_id: id,
+                user_id: user.user.userId
+            });
+        } catch (error: any) {
+            if (error.code = "ER_DUP_ENTRY") {
+                return fail(400, {
+                    message: "You are already on this fligth",
+                });
+            }
+            return fail(500, {
+                message: "An unkown error occured",
+            })
+        }
+        
         return {
             success: true,
         }
