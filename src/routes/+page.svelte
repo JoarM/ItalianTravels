@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { buttonVariants } from "$lib/components/ui/button";
 	import { cn } from "$lib/utils";
-    import type { LayoutData, PageData } from "./$types";
+    import type { PageData } from "./$types";
 
     export let data: PageData;
 </script>

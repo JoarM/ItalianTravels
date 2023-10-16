@@ -61,7 +61,7 @@ export const flyAndScale = (
     };
 };
 
-export function formatTime(minutes: number | null): string {
+export function formatTime(minutes: number | null | undefined): string {
     if (!minutes) return "";
     return `${Math.floor(minutes / 60)} hours ${minutes % 60} minutes`
 }

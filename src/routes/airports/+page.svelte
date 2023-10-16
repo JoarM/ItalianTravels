@@ -43,13 +43,13 @@
                     <Select.Value placeholder={data.limit.toString()}/>
                 </Select.Trigger>
                 <Select.Content>
-                    <a href="/flights?start={data.start}&limit=10">
+                    <a href="/airports?start={data.start}&limit=10">
                         <Select.Item value="10">10</Select.Item>
                     </a>
-                    <a href="/flights?start={data.start}&limit=25">
+                    <a href="/airports?start={data.start}&limit=25">
                         <Select.Item value="25">25</Select.Item>
                     </a>
-                    <a href="/flights?start={data.start}&limit=50" class="w-full">
+                    <a href="/airports?start={data.start}&limit=50" class="w-full">
                         <Select.Item value="50">50</Select.Item>
                     </a>
                 </Select.Content>
@@ -63,7 +63,7 @@
         use:melt={$root}
         >
             <div class="flex items-center gap-2">
-                <a href="/flights?start={data.start - 1}&limit={data.limit}"
+                <a href="/airports?start={data.start - 1}&limit={data.limit}"
                 class={cn(buttonVariants({ variant: "outline" }), `${data.start <= 1 && "opacity-50 pointer-events-none"}`)}
                 use:melt={$prevButton}
                 ><ChevronLeft class="square-4" />
@@ -72,13 +72,13 @@
                 {#if page.type === 'ellipsis'}
                     <span>...</span>
                 {:else}
-                    <a href="/flights?start={page.value}&limit={data.limit}"
+                    <a href="/airports?start={page.value}&limit={data.limit}"
                     class={cn(buttonVariants({ variant: "outline" }))}
                     use:melt={$pageTrigger(page)}>{page.value}</a
                     >
                 {/if}
                 {/each}
-                <a href="/flights?start={data.start + 1}&limit={data.limit}"
+                <a href="/airports?start={data.start + 1}&limit={data.limit}"
                 class={cn(buttonVariants({ variant: "outline" }), `${data.start * data.limit >= data.airportCount && "opacity-50 pointer-events-none"}`)}
                 use:melt={$nextButton}><ChevronRight class="square-4" /></a
                 >
