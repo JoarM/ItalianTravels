@@ -9,8 +9,8 @@
     import { ChevronLeft, ChevronRight } from 'lucide-svelte';
 
     export let data: PageData;
-
-    const {
+    
+    $: ({
         elements: { root, pageTrigger, prevButton, nextButton },
         states: { pages, range },
     } = createPagination({
@@ -18,7 +18,7 @@
         perPage: data.limit,
         defaultPage: 1,
         siblingCount: 1,
-    });
+    }));
 </script>
 
 <main class="mx-auto w-full max-w-6xl py-12 px-6">
@@ -61,15 +61,15 @@
                     <Select.Value placeholder={data.limit.toString()}/>
                 </Select.Trigger>
                 <Select.Content>
-                    <Select.Item value="10">
-                        <a href="/flights?start={data.start}&limit=10" class="w-full">10</a>
-                    </Select.Item>
-                    <Select.Item value="25">
-                        <a href="/flights?start={data.start}&limit=25" class="w-full">25</a>
-                    </Select.Item>
-                    <Select.Item value="50">
-                        <a href="/flights?start={data.start}&limit=50" class="w-full">50</a>
-                    </Select.Item>
+                    <a href="/flights?start={data.start}&limit=10">
+                        <Select.Item value="10">10</Select.Item>
+                    </a>
+                    <a href="/flights?start={data.start}&limit=25">
+                        <Select.Item value="25">25</Select.Item>
+                    </a>
+                    <a href="/flights?start={data.start}&limit=50" class="w-full">
+                        <Select.Item value="50">50</Select.Item>
+                    </a>
                 </Select.Content>
             </Select.Root>
         </div>
@@ -103,6 +103,4 @@
             </div>
         </nav>
     </div>
-
-    
 </main>

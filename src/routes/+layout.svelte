@@ -18,6 +18,9 @@
 					<li>
 						<a href="/flights" class={cn(buttonVariants({ variant: "outline" }))}>Flights</a>
 					</li>
+					<li>
+						<a href="/airports" class={cn(buttonVariants({ variant: "outline" }))}>Airports</a>
+					</li>
 				</ul>
 			</nav>
 		</div>
