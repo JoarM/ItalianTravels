@@ -21,6 +21,10 @@
     }));
 </script>
 
+<svelte:head>
+    <title>Flights - Italian flights</title>
+</svelte:head>
+
 <main class="mx-auto w-full max-w-6xl py-12 px-6">
     <h1 class="text-4xl font-bold tracking-tight lg:text-5xl">Fligths</h1>
 

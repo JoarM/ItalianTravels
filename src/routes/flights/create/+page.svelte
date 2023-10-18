@@ -15,6 +15,10 @@
     let creating = false;
 </script>
 
+<svelte:head>
+    <title>Create flight - Italian flights</title>
+</svelte:head>
+
 <main class="mx-auto w-full max-w-6xl py-12 px-6">
     <h1 class="text-4xl font-bold tracking-tight lg:text-5xl">Create flight</h1>
     <form method="post" class="mt-6 grid gap-4" use:enhance={() => {

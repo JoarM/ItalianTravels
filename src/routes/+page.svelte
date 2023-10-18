@@ -6,6 +6,10 @@
     export let data: PageData;
 </script>
 
+<svelte:head>
+    <title>Homepage - Italian flights</title>
+</svelte:head>
+
 <main class="mx-auto w-full max-w-6xl grid place-items-center py-12 px-6">
     <h1 class="text-4xl font-bold tracking-tight lg:text-5xl">Italian Flights</h1>
     <div class="grid md:grid-cols-2 gap-8 w-full mt-4">

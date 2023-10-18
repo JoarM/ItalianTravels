@@ -9,6 +9,10 @@
     export let form: ActionData;
 </script>
 
+<svelte:head>
+    <title>Flight {data.flight.id} - Italian flights</title>
+</svelte:head>
+
 <main class="mx-auto w-full max-w-6xl py-12 px-6">
     <h1 class="text-4xl font-bold tracking-tight lg:text-5xl">Flight { data.flight.id }</h1>
     <p class="text-lg font-light mt-3">Flight { data.flight.id } from { data.flight.origin?.city } { data.flight.origin?.code }  to { data.flight.destination?.city } { data.flight.destination?.code } in { formatTime(data.flight.duration) }</p>
