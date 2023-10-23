@@ -13,10 +13,12 @@
 	<title>Italian flights</title>
 </svelte:head>
 
+<!-- Top bar -->
 <header class="sticky top-0 border-b backdrop-blur-sm h-16 flex items-center justify-center bg-background/50">
 	<div class="w-full max-w-6xl px-6 flex items-center justify-between">
 		<div class="flex gap-4 items-center justify-center">
 			<a href="/" class="font-bold text-2xl">Italian Flights</a>
+			<!-- Navbar -->
 			<nav>
 				<ul class="flex items-center justify-center gap-2">
 					<li>
@@ -29,7 +31,9 @@
 			</nav>
 		</div>
 		
+		<!-- User bar -->
 		<form method="post">
+			<!-- Show user if logged in or sign in/up if not -->
 			{#if data.user}
 				<span class="mr-3 text-lg font-semibold">{ data.user.firstname }</span>
 				<Button variant="secondary" formaction="/signout?previous={$page.url.pathname}" type="submit" role="button">Signout</Button>

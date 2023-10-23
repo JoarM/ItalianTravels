@@ -31,6 +31,7 @@
         <div class=" grid sm:grid-cols-3 gap-3">
             <div class="grid gap-2">
                 <Label class="w-fit" for="originInput">Origin</Label>
+                <!-- Select element -->
                 <Select.Root onSelectedChange={(e) => origin.value = JSON.stringify(e?.value)}>
                     <Select.Trigger id="originInput">
                         <Select.Value placeholder="Select origin" />
@@ -43,11 +44,13 @@
                         {/each}
                     </Select.Content>
                 </Select.Root>
+                <!-- Hack to send correct airport -->
                 <input type="hidden" bind:this={origin} name="origin">
             </div>
             
             <div class="grid gap-2">
                 <Label class="w-fit" for="destinationInput">Destination</Label>
+                <!-- Select element -->
                 <Select.Root onSelectedChange={(e) => destination.value = JSON.stringify(e?.value)}>
                     <Select.Trigger id="destinationInput">
                         <Select.Value placeholder="Select destination" />
@@ -60,6 +63,7 @@
                         {/each}
                     </Select.Content>
                 </Select.Root>
+                <!-- Hack to send correct airport -->
                 <input type="hidden" bind:this={destination} name="destination">
             </div>
             
@@ -76,6 +80,7 @@
             {creating ? "Adding flight" : "Add flight"}
         </Button>
         
+        <!-- Form response -->
         {#if form?.message}
             <p class="text-destructive text-sm font-medium">{ form.message }</p>
         {/if}

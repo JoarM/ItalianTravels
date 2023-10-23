@@ -1,7 +1,7 @@
 import { mysqlTable, bigint, varchar, unique } from "drizzle-orm/mysql-core";
-import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
+//User schema
 export const user = mysqlTable("auth_user", {
 	id: varchar("id", {
 		length: 256
@@ -15,6 +15,7 @@ export const user = mysqlTable("auth_user", {
 	}),
 });
 
+//Create user parser
 export const insertUserSchema = z.object({
 	email: z.string()
 	.email({ message: "Please enter a valid email" }),
@@ -32,6 +33,7 @@ export const insertUserSchema = z.object({
 	.regex(/[0-9]/, { message: "Password must include number" }),
 });
 
+//Login user parser
 export const signinSchema = z.object({
 	email: z.string()
 	.min(1),
@@ -39,6 +41,7 @@ export const signinSchema = z.object({
 	.min(1)
 });
 
+//User-key schema
 export const key = mysqlTable("user_key", {
 	id: varchar("id", {
 		length: 255
@@ -53,6 +56,7 @@ export const key = mysqlTable("user_key", {
 	})
 });
 
+//User-session schema
 export const session = mysqlTable("user_session", {
 	id: varchar("id", {
 		length: 128
@@ -70,21 +74,25 @@ export const session = mysqlTable("user_session", {
 	}).notNull()
 });
 
+//Airports schema
 export const airports = mysqlTable("airports", {
     code: varchar("code", { length: 3 }).primaryKey(),
     city: varchar("city", { length: 64 }),
 });
 
+//Arriavals schema
 export const arrivals = mysqlTable("arrivals", {
 	airport_code: varchar("airport_code", { length: 3 }).references(() => airports.code),
 	flight_id: bigint("flight_id", { mode: "number" }).references(() => flights.id),
 });
 
+//Departures schema
 export const departures = mysqlTable("departures", {
 	airport_code: varchar("airport_code", { length: 3 }).references(() => airports.code),
 	flight_id: bigint("flight_id", { mode: "number" }).references(() => flights.id),
 });
 
+//Flights schema
 export const flights = mysqlTable("flights", {
 	id: bigint("id", { mode: "number" }).unique().autoincrement().unique().primaryKey(),
     origin: varchar("origin", { length: 3 }).references(() => airports.code, {
@@ -96,12 +104,14 @@ export const flights = mysqlTable("flights", {
     duration: bigint("duration", { mode: "number" }), //Flight duration in minutes
 });
 
+//New flight parsers
 export const insertFlightSchema = z.object({
 	origin: z.string().length(3, { message: "Incorrect origin code format" }),
 	destination: z.string().length(3, { message: "Incorrect destination code format" }),
 	duration: z.number().min(10, { message: "Fligths cant be shorter than 10 minutes" }),
 });
 
+//Passenger schema
 export const passengers = mysqlTable("passengers", {
 	user_id: varchar("user_id", { length: 256 }).references(() => user.id),
 	flight_id: bigint("flight_id", { mode: "number" }).references(() => flights.id),

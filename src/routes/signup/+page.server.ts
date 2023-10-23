@@ -5,12 +5,14 @@ import { auth } from "$lib/server/lucia";
 
 export const actions = {
     default: async ({ request, locals, url }) => {
+        //Get formdata
         const formdata = await request.formData();
         const firstname = formdata.get("firstname")?.valueOf();
         const lastname = formdata.get("lastname")?.valueOf();
         const email = formdata.get("email")?.valueOf();
         const password = formdata.get("password")?.valueOf();
 
+        //Parse formdata
         const parse = await insertUserSchema.safeParseAsync({
             firstname,
             lastname,
@@ -37,6 +39,7 @@ export const actions = {
         }
 
         try {
+            //Create user
             const user = await auth.createUser({
                 key: {
                     providerId: "email",
@@ -50,6 +53,7 @@ export const actions = {
                 }
             });
 
+            //Login user
             const session = await auth.createSession({
                 userId: user.userId,
                 attributes: {}
@@ -57,7 +61,7 @@ export const actions = {
 
             locals.auth.setSession(session);
         } catch (error: any) {
-            console.log(error);
+            //Check for known errors or return unknown error
             if (error.code === "ER_DUP_ENTRY") {
                 return fail(400, {
                     message: "An account with this email already exists",
@@ -69,9 +73,12 @@ export const actions = {
 			});
         }
 
+        //Get search param
         let previous = url.searchParams.get("previous");
+        //Turnary to set the string to empty or remove first char
         previous = previous ? previous.slice(1) : "";
 
+        //Redirect user
         throw redirect(302, "/" + previous);
     }
 } satisfies Actions;

@@ -1,9 +1,10 @@
 import { db } from "$lib/db";
 import { airports, arrivals, departures, flights } from "$lib/db/schema";
-import { eq, sql } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import type { PageServerLoad } from "./$types";
 
 export const load: PageServerLoad = async ({ params }) => {
+    //Query from database and return
     return {
         airport: (await db.select()
         .from(airports)

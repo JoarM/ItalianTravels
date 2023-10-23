@@ -13,6 +13,7 @@
 <main class="mx-auto w-full max-w-6xl grid place-items-center py-12 px-6">
     <h1 class="text-4xl font-bold tracking-tight lg:text-5xl">Italian Flights</h1>
     <div class="grid md:grid-cols-2 gap-8 w-full mt-4">
+        <!-- Show flights -->
         <article class="p-3 rounded-md border">
             <h2 class="border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">Fligths</h2>
             <ul class="mt-2">
@@ -25,6 +26,7 @@
             <a href="/flights" class={cn(buttonVariants({ variant: "secondary" }), "mt-2")}>View all</a>
         </article>
 
+        <!-- Show airports -->
         <article class="p-3 rounded-md border">
             <h2 class="border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">Airports</h2>
             <ul class="mt-2">

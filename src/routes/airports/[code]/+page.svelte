@@ -13,6 +13,7 @@
     <h1  class="text-4xl font-bold tracking-tight lg:text-5xl">{ data.airport.city } { data.airport.code }</h1>
 
     <div class="grid grid-cols-2 divide-x mt-6 border rounded-lg">
+        <!-- Show Arrivals -->
         <div class="py-4">
             <h2 class="border-b pb-2 px-4 text-3xl font-semibold tracking-tight transition-colors first:mt-0">Arrivals</h2>
             <ul class="divide-y mt-4 px-4">
@@ -26,6 +27,7 @@
             </ul>
         </div>
 
+        <!-- Show departures -->
         <div class="py-4">
             <h2 class="border-b pb-2 px-4 text-3xl font-semibold tracking-tight transition-colors first:mt-0">Departures</h2>
             <ul class="divide-y mt-4 px-4">

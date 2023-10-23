@@ -10,6 +10,7 @@
 
     export let data: PageData;
     
+    //Define reactive paginator
     $: ({
         elements: { root, pageTrigger, prevButton, nextButton },
         states: { pages, range },
@@ -30,6 +31,7 @@
 
     <a href="/flights/create" class={cn(buttonVariants({ variant: "outline" }), "mt-3")}>Add flight</a>
 
+    <!-- Table to show flights list -->
     <Table.Root class="mt-4 p-4">
         <Table.Header>
             <Table.Row>
@@ -51,6 +53,8 @@
             {/each}
         </Table.Body>
     </Table.Root>
+
+    <!-- Paginator -->
     {#if data.flights.length}
         <p class="mt-2 text-sm text-muted-foreground">Showing flight { $range.start } - { $range.end } of { data.flightCount }</p>
     {:else}

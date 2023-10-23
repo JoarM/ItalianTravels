@@ -88,6 +88,8 @@
             {/if}
             Sign up
         </Button>
+
+        <!-- Show form response -->
         {#if form?.message}
             <span class="text-destructive text-sm font-medium">{ form.message }</span>
         {/if}

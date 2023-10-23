@@ -4,6 +4,7 @@ import { dev } from "$app/environment";
 import { mysql2 } from "@lucia-auth/adapter-mysql";
 import { poolConnection } from "$lib/db";
 
+//Auth setup
 export const auth = lucia({
 	adapter: mysql2(poolConnection, {
         user: "auth_user",

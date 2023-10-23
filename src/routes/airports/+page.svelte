@@ -9,6 +9,7 @@
 
     export let data: PageData;
 
+    //Define and destructure a reactive paginator.
     $: ({
         elements: { root, pageTrigger, prevButton, nextButton },
         states: { pages, range },
@@ -20,25 +21,29 @@
     }));
 </script>
 
+<!-- Define head tags -->
 <svelte:head>
     <title>Airports - Italian flights</title>
 </svelte:head>
 
 <main class="mx-auto w-full max-w-6xl py-12 px-6">
-    <h1 class="text-4xl font-bold tracking-tight lg:text-5xl">Fligths</h1>
+    <h1 class="text-4xl font-bold tracking-tight lg:text-5xl">Airports</h1>
 
+    <!-- Create a list with the airport list -->
     <ul class="grid space-y-2 mt-3">
         {#each data.airports as airport}
             <a href="/airports/{airport.code}" class={cn(buttonVariants({ variant: "link" }), "justify-start")}>{ airport.city } { airport.code }</a>
         {/each}
     </ul>
 
+    <!-- Show visible flight or error message -->
     {#if data.airports.length}
         <p class="mt-2 text-sm text-muted-foreground">Showing flight { $range.start } - { $range.end } of { data.airportCount }</p>
     {:else}
         <p class="text-sm font-normal mt-4">No content for this selection.</p>
     {/if}
 
+    <!-- Paginator -->
     <div class="grid grid-cols-3 gap-4 place-items-center mt-2">
         <div class="flex items-center justify-center justify-self-start gap-2">
             <Label for="limit">Items on this page</Label>

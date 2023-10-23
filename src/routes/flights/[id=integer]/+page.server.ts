@@ -8,12 +8,14 @@ export const load: PageServerLoad = async ({ params, parent }) => {
     const id = Number(params.id);
     const { user: currentUser } = await parent();
 
+    //Query database
     const rows = await db
     .select()
     .from(flights)
     .where(eq(flights.id, id))
     .leftJoin(airports, or(eq(flights.origin, airports.code), eq(flights.destination, airports.code)));
 
+    //Format query
     const result = () => {
         return {
             id: rows[0].flights.id,
@@ -23,6 +25,7 @@ export const load: PageServerLoad = async ({ params, parent }) => {
         }
     }
 
+    //Query database
     const queryPassengers = await db
     .select({
         firstname: user.firstname,
@@ -42,6 +45,7 @@ export const load: PageServerLoad = async ({ params, parent }) => {
     }
 }
 
+//Define form actions
 export const actions = {
     book: async ({ params, locals }) => {
         const id = Number(params.id);
@@ -53,18 +57,20 @@ export const actions = {
         }
 
         try {
+            //Add user
             await db.insert(passengers).values({
                 flight_id: id,
                 user_id: user.user.userId
             });
         } catch (error: any) {
+            //Check for known error or return Unkown error
             if (error.code = "ER_DUP_ENTRY") {
                 return fail(400, {
                     message: "You are already on this fligth",
                 });
             }
             return fail(500, {
-                message: "An unkown error occured",
+                message: "An unknown error occured",
             });
         }
         
@@ -82,6 +88,7 @@ export const actions = {
         }
 
         try {
+            //Remove user from passengers
             await db.delete(passengers).where(and(eq(passengers.flight_id, id), eq(passengers.user_id, user.user.userId)));
         } catch (error) {
             return fail(500, {
