@@ -1,5 +1,8 @@
 <script lang="ts">
-	import { buttonVariants } from "$lib/components/ui/button";
+	import { enhance } from "$app/forms";
+	import AirportCombobox from "$lib/components/custom/airportCombobox.svelte";
+import { buttonVariants } from "$lib/components/ui/button";
+	import Button from "$lib/components/ui/button/button.svelte";
 	import { cn } from "$lib/utils";
     import type { PageData } from "./$types";
 
@@ -12,6 +15,26 @@
 
 <main class="mx-auto w-full max-w-6xl grid place-items-center py-12 px-6">
     <h1 class="text-4xl font-bold tracking-tight lg:text-5xl">Italian Flights</h1>
+        
+    <!--Search function-->
+    <form method="post" class="flex w-full mt-4 gap-3" use:enhance>
+        <div class="grid grid-cols-2 gap-2 flex-grow">
+            <AirportCombobox
+            airports={data.airports}
+            placeholder={"from"}
+            name="from"
+            />
+
+            <AirportCombobox
+            airports={data.airports}
+            placeholder={"to"}
+            name="to"
+            />
+        </div>
+
+        <Button>Find flight</Button>
+    </form>
+    
     <div class="grid md:grid-cols-2 gap-8 w-full mt-4">
         <!-- Show flights -->
         <article class="p-3 rounded-md border">

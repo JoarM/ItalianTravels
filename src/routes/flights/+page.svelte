@@ -34,7 +34,7 @@
     <!-- Table to show flights list -->
     <Table.Root class="mt-4 p-4">
         <Table.Header>
-            <Table.Row>
+            <Table.Row class="hover:bg-background">
                 <Table.Head class="w-28">Id</Table.Head>
                 <Table.Head>From</Table.Head>
                 <Table.Head>To</Table.Head>
