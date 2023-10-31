@@ -32,7 +32,7 @@
           code.toLowerCase().includes(normalizedInput)
         );
       })
-    : airports;
+    : airports.slice(0, 10);
 </script>
 
 <input type="hidden" value={$selected?.value ? $selected.value: ""} name={name}>

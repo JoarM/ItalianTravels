@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { enhance } from "$app/forms";
 	import AirportCombobox from "$lib/components/custom/airportCombobox.svelte";
-import { buttonVariants } from "$lib/components/ui/button";
+    import { buttonVariants } from "$lib/components/ui/button";
 	import Button from "$lib/components/ui/button/button.svelte";
 	import { cn } from "$lib/utils";
     import type { PageData } from "./$types";
@@ -20,13 +20,13 @@ import { buttonVariants } from "$lib/components/ui/button";
     <form method="post" class="flex w-full mt-4 gap-3" use:enhance>
         <div class="grid grid-cols-2 gap-2 flex-grow">
             <AirportCombobox
-            airports={data.airports}
+            airports={data.allAirports}
             placeholder={"from"}
             name="from"
             />
 
             <AirportCombobox
-            airports={data.airports}
+            airports={data.allAirports}
             placeholder={"to"}
             name="to"
             />

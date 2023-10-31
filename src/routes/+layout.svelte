@@ -35,7 +35,7 @@
 		<form method="post">
 			<!-- Show user if logged in or sign in/up if not -->
 			{#if data.user}
-				<span class="mr-3 text-lg font-semibold">{ data.user.firstname }</span>
+				<a href="/profile" class={cn(buttonVariants({ variant: "link" }), "mr-2")}>{ data.user.firstname }</a>
 				<Button variant="secondary" formaction="/signout?previous={$page.url.pathname}" type="submit" role="button">Signout</Button>
 			{:else}
 				<a href="/signin?previous={$page.url.pathname}" class={cn(buttonVariants({ variant: "outline" }), "mr-2")}>
