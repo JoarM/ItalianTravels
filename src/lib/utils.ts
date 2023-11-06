@@ -66,3 +66,9 @@ export function formatTime(minutes: number | null | undefined): string {
     if (!minutes) return "";
     return `${Math.floor(minutes / 60)} hours ${minutes % 60} minutes`
 }
+
+//Get the correct page
+export function getStart(length: number, current: number, limit: number): number {
+    const max = Math.floor(length / limit) + 1;
+    return current > max ? max : current;
+}

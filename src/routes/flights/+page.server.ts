@@ -12,7 +12,8 @@ export const load: PageServerLoad = async ({ url }) => {
 
 
     //Get table length
-    const count = await db.select({ count: sql`COUNT(*)` }).from(flights);
+    const count = await db.select({ count: sql`COUNT(*)` }).from(flights)
+    .where(and(eq(flights.origin, from ? from : flights.origin), eq(flights.destination, to ? to : flights.destination)));
 
     //Validate params
     if (Number.isNaN(start) || start < 1) {

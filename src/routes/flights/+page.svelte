@@ -3,7 +3,7 @@
 	import Label from "$lib/components/ui/label/label.svelte";
 	import * as Select from "$lib/components/ui/select";
 	import * as Table from "$lib/components/ui/table";
-	import { cn, formatTime } from "$lib/utils";
+	import { cn, formatTime, getStart } from "$lib/utils";
 	import type { PageData } from "./$types";
     import { createPagination, melt } from '@melt-ui/svelte';
     import { ChevronLeft, ChevronRight } from 'lucide-svelte';
@@ -69,13 +69,13 @@
                     <Select.Value placeholder={data.limit.toString()}/>
                 </Select.Trigger>
                 <Select.Content>
-                    <a href="/flights?start={data.start}&limit=10&from={data.from}&to={data.to}">
+                    <a href="/flights?start={getStart(data.flightCount, data.start, 10)}&limit=10&from={data.from}&to={data.to}">
                         <Select.Item value="10">10</Select.Item>
                     </a>
-                    <a href="/flights?start={data.start}&limit=25&from={data.from}&to={data.to}">
+                    <a href="/flights?start={getStart(data.flightCount, data.start, 25)}&limit=25&from={data.from}&to={data.to}">
                         <Select.Item value="25">25</Select.Item>
                     </a>
-                    <a href="/flights?start={data.start}&limit=50&from={data.from}&to={data.to}">
+                    <a href="/flights?start={getStart(data.flightCount, data.start, 50)}&limit=50&from={data.from}&to={data.to}">
                         <Select.Item value="50">50</Select.Item>
                     </a>
                 </Select.Content>

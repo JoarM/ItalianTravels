@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { buttonVariants } from "$lib/components/ui/button";
-	import { cn } from "$lib/utils";
+	import { cn, getStart } from "$lib/utils";
     import type { PageData } from "./$types";
 	import Label from "$lib/components/ui/label/label.svelte";
 	import * as Select from "$lib/components/ui/select";
@@ -52,13 +52,13 @@
                     <Select.Value placeholder={data.limit.toString()}/>
                 </Select.Trigger>
                 <Select.Content>
-                    <a href="/airports?start={data.start}&limit=10">
+                    <a href="/airports?start={getStart(data.airportCount, data.start, 10)}&limit=10">
                         <Select.Item value="10">10</Select.Item>
                     </a>
-                    <a href="/airports?start={data.start}&limit=25">
+                    <a href="/airports?start={getStart(data.airportCount, data.start, 25)}&limit=25">
                         <Select.Item value="25">25</Select.Item>
                     </a>
-                    <a href="/airports?start={data.start}&limit=50" class="w-full">
+                    <a href="/airports?start={getStart(data.airportCount, data.start, 50)}&limit=50" class="w-full">
                         <Select.Item value="50">50</Select.Item>
                     </a>
                 </Select.Content>
