@@ -57,7 +57,7 @@
             <Input 
             name="email" 
             id="email" 
-            type="email" 
+            type="name" 
             autocomplete="email"
             />
             {#if form?.errors?.email}
