@@ -94,7 +94,7 @@ export const departures = mysqlTable("departures", {
 
 //Flights schema
 export const flights = mysqlTable("flights", {
-	id: bigint("id", { mode: "number" }).unique().autoincrement().unique().primaryKey(),
+	id: bigint("id", { mode: "number" }).autoincrement().primaryKey(),
     origin: varchar("origin", { length: 3 }).references(() => airports.code, {
 		onDelete: "cascade"
 	}),
